@@ -1,43 +1,62 @@
 <h1>Eat-Da-Burger!</h1>
-
-<div class="available-burgers">
-  <h2>Burgers available to eat:</h2>
-  <ul>
-    {{#each burgers}}
-    {{#unless devoured}}
-    {{burgers devour=true}}
- <button type="submit">{{$this.burgers_name}}</button>
-
-    {{/unless}}
-    {{/each}}
-  </ul>
- 
-</div>
-
-<div class="devoured">
-  <h2>Burgers dat have been eaten!</h2>
-
-  <ul>
-    {{#each burgers}}
-    {{#if available}}
-    {{burgers available=false}}
-    {{/if}}
-    {{/each}}
-    
-  </ul>
-</div>
+<br>
+<img src="https://cdn.custom-cursor.com/packs/2547/cloudy-with-a-chance-of-meatballs-cheespider-cursor-pack.png"
+  alt="Eat Da Burger" class="center">
 
 
+<div class="all-burgers">
 
-<h2>Add a New Burger</h2>
-<div id="add-dat">
-<form class="create-form" action="/burgers/create" method="POST">
+  <div class="available-burgers">
+    <h2>Burgers available to eat:</h2>
+    <ul>
 
-  <div class="form-group">
-    <label for="name">Burger Name:</label>
-    <input type="text" id="ca" name="name">
+      {{#each burgers}}
+      {{#unless this.devoured}}
+
+      <li class="burger-block">
+        <p>{{this.burger_name}}</p>
+        <button class="eat-dat btn" data-id="{{this.id}}">Eat dat</button>
+      </li>
+
+      {{/unless}}
+      {{/each}}
+
+    </ul>
   </div>
 
-  <button type="submit">Add New Burger</button>
-</form>
+
+  <div class="devoured">
+    <h2>Burgers dat have been eaten!</h2>
+
+    <ul>
+      {{#each burgers}}
+      {{#if this.devoured}}
+
+      <li class="burger-block">
+        <p>{{this.burger_name}}</p>
+      </li>
+
+      {{/if}}
+      {{/each}}
+
+    </ul>
+  </div>
+
+</div>
+
+
+<div class="form-container">
+  <form class="create-form" id="add-dat" action="/burgers/create" method="POST">
+    <div class="form-group">
+      <h2>Add a New Burger</h2>
+
+      <div class="burger-block">
+        <label for="name">Burger Name:</label>
+        <input type="text" id="ca" name="burname" maxlength="75">
+
+        <button type="submit" class="btn">Add Da Burger</button>
+      </div>
+
+    </div>
+  </form>
 </div>
